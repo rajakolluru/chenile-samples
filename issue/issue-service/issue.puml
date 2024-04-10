@@ -1,0 +1,14 @@
+@startuml
+skinparam State {
+  FontSize 15
+  FontName "Source Code Pro"
+  borderColor Black
+  backgroundColor #cccccc
+  ArrowFontName "Source Code Pro"
+}
+[*] -> Opened
+Opened -> Assigned : assign
+Assigned -> Resolved : resolve
+Resolved -> Closed : close
+Closed -> [*]
+@enduml
