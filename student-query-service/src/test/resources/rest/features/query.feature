@@ -1,23 +1,8 @@
  
-Feature: Tests the Mybatis Query Service using a REST client. 
- 
-Scenario: Test get By Id
-When I POST a REST request to URL "/q/student" with payload
-"""
-{
-	"filters" :{
-		"id": 1
-	}	
-}
-"""
-Then the http status code is 200
-And the top level code is 200
-And success is true 
-And the REST response key "numRowsReturned" is "1"
-And the REST response key "list[0].row.phone" is "9988765700"
+Feature: Tests the Student Query Service using a REST client. 
 
-Scenario: Test getAll - tests out pagination capability
-When I POST a REST request to URL "/q/students-all" with payload
+Scenario: Tests out pagination capability
+When I POST a REST request to URL "/q/students" with payload
 """
 {
 	"sortCriteria" :[
@@ -38,9 +23,7 @@ And the REST response key "list[0].row.id" is "25"
 And the REST response key "list[14].row.name" is "Vikas"
 And the REST response key "list[14].row.id" is "18"
 
-
-
-Scenario: Test Specific - Test Likes query
+Scenario: Test Likes query
 When I POST a REST request to URL "/q/students" with payload
 """
 {

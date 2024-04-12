@@ -1,4 +1,4 @@
-package org.chenile.query.service.bdd;
+package org.chenile.samples.student.query.service.bdd;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,12 +7,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import cucumber.api.java.en.Given;
 
-/**
- * 
- * The reference to SpringBootTest is important 
- * @author Raja Shankar Kolluru
- *
- */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,classes = SpringTestConfig.class,
   properties = {"spring.profiles.active=unittest"})
 @AutoConfigureMockMvc

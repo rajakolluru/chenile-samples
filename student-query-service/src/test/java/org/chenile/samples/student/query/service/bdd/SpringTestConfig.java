@@ -1,4 +1,4 @@
-package org.chenile.query.service.bdd;
+package org.chenile.samples.student.query.service.bdd;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
