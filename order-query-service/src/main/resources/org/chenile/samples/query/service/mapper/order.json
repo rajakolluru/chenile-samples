@@ -1,0 +1,47 @@
+[
+	{
+
+        "id": "Order.getAll",
+        "name": "orders",
+        "columnMetadata": {
+			"id" : {
+				"name": "id",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": false
+			},
+			"amount" : {
+				"name": "amount",
+				"columnType" : "Number",
+				"likeQuery": false,
+				"filterable": true,
+				"betweenQuery": true
+			},
+			"product" : {
+				"name": "product",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": false,
+				"containsQuery": true
+			},
+			"unit_cost" : {
+				"name": "unit_cost",
+				"columnType" : "Number",
+				"likeQuery": false,
+				"filterable": false,
+				"betweenQuery": false
+			},
+			"quantity" : {
+				"name": "quantity",
+				"columnType" : "Number",
+				"likeQuery": false,
+				"filterable": false,
+				"betweenQuery": false
+			}
+		},	
+		"flexiblePropnames": false,
+        "paginated" : true,
+        "sortable" : true
+    }
+    
+]
