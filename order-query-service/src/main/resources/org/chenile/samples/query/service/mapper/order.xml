@@ -43,13 +43,18 @@ Hence the count query does a count(order.id) rather than do a full count(*)
 <!-- The getAll query supports an elaborate where clause. 
 The conditional constructs ensure that the clause is constructed only if 
 specific filters are passed. Notice that 
-branch supports an IN clause and name supports a like clause. 
-This information must be reflected in the column meta data in the definitions JSON that 
+amount supports a between clause and produce supports an IN clause.
+This information must be reflected in the column metadata in the definitions JSON that
 accompanies this mapper.
 Since this query is sortable the orderby clause is important.
 Since this query supports pagination the ${pagination} is mandatory. 
 We also need the count query above
-Make sure that sortable and paginated are set to true in the corresponding query definitions 
+Make sure that sortable and paginated are set to true in the corresponding query definitions.
+Also notice that the order level where clause is in the sub-query (for temporary table u) and
+that the rest of the where clause is in the main result query.
+Finally notice that pagination is in the sub-query since we want to do a join only for one full
+page of data rather than for all orders. This takes care of pagination as well as optimizes the
+final select.
 -->
 <select id = "getAll" resultMap = "result">
     with u(id, amount) as (
