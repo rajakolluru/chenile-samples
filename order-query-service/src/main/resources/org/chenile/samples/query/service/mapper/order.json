@@ -17,6 +17,13 @@
 				"filterable": true,
 				"betweenQuery": true
 			},
+			"order_date" : {
+				"name": "order_date",
+				"columnType" : "DateTime",
+				"likeQuery": false,
+				"filterable": true,
+				"betweenQuery": true
+			},
 			"product" : {
 				"name": "product",
 				"filterable": true,

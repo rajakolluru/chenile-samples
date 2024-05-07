@@ -8,6 +8,7 @@
 <resultMap id = "result" type = "map">
     <result property = "id" column = "ID"/>
     <result property = "amount" column = "AMOUNT"/>
+    <result property = "orderDate" column = "ORDER_DATE"/>
     <collection property="orderLines" javaType="ArrayList" resultMap="olResultMap"/>
 </resultMap>
 
@@ -29,6 +30,9 @@ Hence the count query does a count(order.id) rather than do a full count(*)
     <where>
         <if test="amount != null" >
             AND amount between #{amount[0]} and #{amount[1]}
+        </if>
+        <if test="order_date != null" >
+            AND order_date between #{order_date[0]} and #{order_date[1]}
         </if>
         <if test="product != null">
             AND product in
@@ -57,18 +61,22 @@ page of data rather than for all orders. This takes care of pagination as well a
 final select.
 -->
 <select id = "getAll" resultMap = "result">
-    with u(id, amount) as (
-       SELECT  id, amount
+    with u(id, amount,order_date) as (
+       SELECT  id, amount,order_date
         FROM orders
         <where>
             <if test="amount != null" >
                 AND amount between #{amount[0]} and #{amount[1]}
+            </if>
+            <if test="order_date != null" >
+                AND order_date between #{order_date[0]} and #{order_date[1]}
             </if>
         </where>
         ${pagination}
     )
         select u.id as id,
         u.amount as amount,
+        to_char(u.order_date,'YYYY-MM-DD HH12:MI:SS') as order_date,
         ol.product as product,
         ol.unit_price as unit_price,
         ol.quantity as quantity
