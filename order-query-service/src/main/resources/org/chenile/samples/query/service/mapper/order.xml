@@ -47,7 +47,7 @@ Hence the count query does a count(order.id) rather than do a full count(*)
 <!-- The getAll query supports an elaborate where clause. 
 The conditional constructs ensure that the clause is constructed only if 
 specific filters are passed. Notice that 
-amount supports a between clause and produce supports an IN clause.
+amount supports a between clause and product supports an IN clause.
 This information must be reflected in the column metadata in the definitions JSON that
 accompanies this mapper.
 Since this query is sortable the orderby clause is important.
