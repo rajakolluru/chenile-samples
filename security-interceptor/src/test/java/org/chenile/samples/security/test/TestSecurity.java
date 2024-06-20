@@ -1,5 +1,6 @@
 package org.chenile.samples.security.test;
 
+import org.chenile.core.context.HeaderUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,18 @@ public class TestSecurity {
 		if (is != null){
 			token = new String(is.readAllBytes(), StandardCharsets.UTF_8);
 		}
-		System.err.println("token is " + token);
+		// System.err.println("token is " + token);
 
 		mvc.perform( MockMvcRequestBuilders
             .get("/test")
             .header("security-interceptor-preprocessheader","some_message")
         	.header("security-interceptor-postprocessheader","some_message")
+			.header(HeaderUtils.TENANT_ID_KEY,"quickstart")
+			// .header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7l")
 			.header("Authorization", "Bearer " + token.strip())
+
+			//.header("User-Agent",
+					//"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 			.accept(MediaType.APPLICATION_JSON))
         	.andDo(print())
         	.andExpect(status().isOk())

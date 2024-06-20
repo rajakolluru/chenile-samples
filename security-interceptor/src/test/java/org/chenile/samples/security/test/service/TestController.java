@@ -19,7 +19,7 @@ import org.chenile.samples.security.SecurityConfig;
 public class TestController extends ControllerSupport{
 	@GetMapping("/test")
 	@InterceptedBy("securityInterceptor")
-	@SecurityConfig("some_message")
+	@SecurityConfig
 	ResponseEntity<GenericResponse<Map<String, Object>>> example(HttpServletRequest request){
 		return process("example",request);
 	}

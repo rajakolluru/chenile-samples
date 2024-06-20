@@ -3,15 +3,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8180/realms/quickstart/protocol/openid-connect/certs
-      client:
-        registration:
-          authz_servlet:
-            provider: my-oidc-provider
-            client-id: authz-servlet
-            client-secret: secret
-            authorization-grant-type: authorization_code
-            scope: openid,profile,email
-        provider:
-          my-oidc-provider:
-            issuer-uri: http://localhost:8180/realms/quickstart
+          jwk-set-uri: http://localhost:8180/realms/#tenantId#/protocol/openid-connect/certs
+
+chenile:
+  security:
+    provider:
+      name: "my-oidc-provider"
+      issuer-uri: http://localhost:8180/realms/#tenantId#

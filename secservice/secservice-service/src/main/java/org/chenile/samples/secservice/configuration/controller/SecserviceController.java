@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecserviceController extends ControllerSupport{
 	
 	@PostMapping("/secservice/op1")
-	@InterceptedBy("securityInterceptor")
-	@SecurityConfig("my_role")
+	//@InterceptedBy("securityInterceptor")
+	@SecurityConfig()
 	public ResponseEntity<GenericResponse<SecserviceEntity>> op1(
 			HttpServletRequest httpServletRequest,
 			@RequestBody SecserviceEntity entity){
