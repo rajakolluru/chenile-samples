@@ -12,14 +12,13 @@
 	<artifactId>secservice-service</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Secservice Service Implementations</name>
+	<name>Sec Service Implementations</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.chenile.samples.secservice</groupId>
 			<artifactId>secservice-api</artifactId>
 		</dependency>
-	
 		<dependency>
 	            <groupId>org.springframework.boot</groupId>
 	            <artifactId>spring-boot-starter-web</artifactId>
@@ -30,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.chenile</groupId>
-			<artifactId>cucumber-utils</artifactId>
+			<artifactId>cucumber-sec-utils</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -41,7 +40,12 @@
 		<dependency>
 			<groupId>org.chenile</groupId>
 			<artifactId>security-interceptor</artifactId>
-			<version>1.2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.dasniko</groupId>
+			<artifactId>testcontainers-keycloak</artifactId>
+			<version>3.4.0</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

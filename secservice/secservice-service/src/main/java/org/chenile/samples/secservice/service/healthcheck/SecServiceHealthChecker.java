@@ -3,7 +3,7 @@ package org.chenile.samples.secservice.service.healthcheck;
 import org.chenile.core.service.HealthCheckInfo;
 import org.chenile.core.service.HealthChecker;
 
-public class SecserviceHealthChecker implements HealthChecker{
+public class SecServiceHealthChecker implements HealthChecker{
 
 	public static final String HEALTH_CHECK_MESSAGE = "Secservice is fine!";
 
