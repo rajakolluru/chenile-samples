@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 		healthCheckerName = "secServiceHealthChecker")
 public class SecServiceController extends ControllerSupport{
 	
-	@PostMapping("/sec/op1")
+	@PostMapping("/sec/premium")
 	@InterceptedBy("securityInterceptor")
-	@SecurityConfig(authorities = {"order.write"})
+	@SecurityConfig(authorities = {"test.premium"})
 	public ResponseEntity<GenericResponse<SecServiceEntity>> op1(
 			HttpServletRequest httpServletRequest,
 			@RequestBody SecServiceEntity entity){
