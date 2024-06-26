@@ -12,7 +12,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(MyRunner.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features",
     glue = {"classpath:org/chenile/samples/secservice/bdd", "classpath:org/chenile/cucumber/rest",
             "classpath:org/chenile/cucumber/security/rest"},
