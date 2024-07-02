@@ -7,10 +7,10 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@SpringBootApplication(scanBasePackages = { "com.netscoretech.pos.**.configuration",
+@SpringBootApplication(scanBasePackages = { "org.chenile.samples.**.configuration",
 		"org.chenile.configuration" })
-@EntityScan("com.netscoretech.pos.**.model")
-@EnableJpaRepositories(basePackages = "com.netscoretech.pos.**.configuration.dao")
+@EntityScan("org.chenile.samples.**.model")
+@EnableJpaRepositories(basePackages = "org.chenile.samples.**.configuration.dao")
 @EnableTransactionManagement
 public class EmployeedApplication extends SpringBootServletInitializer {
 

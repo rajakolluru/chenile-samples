@@ -119,12 +119,12 @@ delete-local-tag: check-tag
 ## cloud-image: Build a docker image for cloud
 .PHONY: cloud-image
 cloud-image:
-	docker build -t netscoretech/poc .
+	docker build -t chenile-samples/cloud-container .
 
 ## store-image: Build a docker image for store
 .PHONY: store-image
 store-image:
-	docker build -f store/Dockerfile -t netscoretech/poc-store .
+	docker build -f store/Dockerfile -t chenile-samples/store-container .
 
 ## help: type for getting this help
 .PHONY: help

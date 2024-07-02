@@ -24,6 +24,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee retrieve(String id) {
 		Optional<Employee> emp = employeeRepository.findById(id);
 		if (emp.isPresent()) return emp.get();
-		throw new NotFoundException(1500,"Unable to find employee");
+		throw new NotFoundException(1500,"Unable to find employee with ID " + id);
 	}
 }
