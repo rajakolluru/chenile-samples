@@ -7,7 +7,7 @@
 	<parent>
 		<artifactId>chenile-parent</artifactId>
 		<groupId>org.chenile</groupId>
-		<version>1.2.3</version>
+		<version>1.2.5</version>
 	</parent>
 	
 	<modelVersion>4.0.0</modelVersion>
@@ -38,7 +38,7 @@
 		</dependency>
 		<dependency>
     		<groupId>org.chenile</groupId>
-    		<artifactId>chenile-query-service</artifactId>
+    		<artifactId>chenile-query-controller</artifactId>
     		<scope>test</scope>
 		</dependency>
 		
