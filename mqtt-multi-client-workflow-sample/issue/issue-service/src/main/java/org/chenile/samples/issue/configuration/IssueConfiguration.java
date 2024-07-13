@@ -1,6 +1,7 @@
 package org.chenile.samples.issue.configuration;
 
-import org.chenile.samples.issue.service.cmds.AddTask;
+import org.chenile.samples.issue.model.CompleteTaskPayload;
+import org.chenile.samples.issue.service.cmds.*;
 import org.chenile.stm.STM;
 import org.chenile.stm.action.STMTransitionAction;
 import org.chenile.stm.impl.BeanFactoryAdapter;
@@ -23,9 +24,6 @@ import org.chenile.workflow.service.stmcmds.GenericEntryAction;
 import org.chenile.workflow.service.stmcmds.GenericExitAction;
 import org.chenile.workflow.service.stmcmds.StmBodyTypeSelector;
 import org.chenile.samples.issue.model.Issue;
-import org.chenile.samples.issue.service.cmds.AssignIssueAction;
-import org.chenile.samples.issue.service.cmds.CloseIssueAction;
-import org.chenile.samples.issue.service.cmds.ResolveIssueAction;
 import org.chenile.samples.issue.service.healthcheck.IssueHealthChecker;
 import org.chenile.samples.issue.service.store.IssueEntityStore;
 
@@ -114,5 +112,13 @@ public class IssueConfiguration {
 	@Bean
 	AddTask addTask(){
 		return new AddTask();
+	}
+	@Bean
+	CompleteTask completeTask(){
+		return new CompleteTask();
+	}
+	@Bean
+	CheckIfAllTasksComplete checkIfAllTasksComplete(){
+		return new CheckIfAllTasksComplete();
 	}
 }

@@ -49,6 +49,7 @@ OPENED -(assign) -> ASSIGNED -(resolve) -> RESOLVED -(close) -> CLOSED
 		And the REST response key "mutatedEntity.id" is "${id}"
 		And the REST response key "mutatedEntity.currentState.stateId" is "ASSIGNED"
 		And the REST response key "mutatedEntity.tasks[0].name" is "investigate"
+		And store "$.payload.mutatedEntity.tasks[0].id" from  response to "taskId"
 	  
 	 Scenario: Resolve the issue with comments
 		When I PUT a REST request to URL "/issue/${id}/resolve" with payload
@@ -57,10 +58,32 @@ OPENED -(assign) -> ASSIGNED -(resolve) -> RESOLVED -(close) -> CLOSED
 			"comment": "CANNOT-DUPLICATE"
 		}
 		"""
-	  Then the REST response contains key "mutatedEntity"
-	  And the REST response key "mutatedEntity.id" is "${id}"
-	  And the REST response key "mutatedEntity.currentState.stateId" is "RESOLVED"
-	  And the REST response key "mutatedEntity.resolveComment" is "CANNOT-DUPLICATE"
+	   Then the REST response does not contain key "mutatedEntity"
+	   And the http status code is 422
+
+	Scenario: Complete the task with comments
+		When I PUT a REST request to URL "/issue/${id}/completeTask" with payload
+		"""
+		{
+			"taskId":"${taskId}",
+			"comment": "Nothing found. cannot duplicate"
+		}
+		"""
+		Then the REST response contains key "mutatedEntity"
+		And the REST response key "mutatedEntity.id" is "${id}"
+		And the REST response key "mutatedEntity.currentState.stateId" is "ASSIGNED"
+		And the REST response key "mutatedEntity.tasks[0].name" is "investigate"
+		And the REST response key "mutatedEntity.tasks[0].id" is "${taskId}"
+
+	Scenario: Resolve the issue with comments
+		When I PUT a REST request to URL "/issue/${id}/resolve" with payload
+		"""
+		{
+			"comment": "CANNOT-DUPLICATE"
+		}
+		"""
+		And the REST response key "mutatedEntity.id" is "${id}"
+		And the REST response key "mutatedEntity.currentState.stateId" is "RESOLVED"
 	  
 	 Scenario: Close the issue with comments
 		When I PUT a REST request to URL "/issue/${id}/close" with payload

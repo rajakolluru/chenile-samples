@@ -61,6 +61,31 @@ Feature: Tests the Chenile Workflow Service using a REST client with an existing
     And the REST response key "mutatedEntity.currentState.stateId" is "ASSIGNED"
     And the REST response key "mutatedEntity.tasks[0].name" is "investigate"
     And the REST response key "mutatedEntity.tasks[0].id" contains string "task-REQUEST-ID"
+    And the REST response key "mutatedEntity.tasks[0].stateId" is "OPENED"
+    And store "$.payload.mutatedEntity.tasks[0].id" from  response to "taskId"
+
+  Scenario: Resolve the issue with comments
+    When I PUT a REST request to URL "/issue/${id}/resolve" with payload
+		"""
+		{
+			"comment": "CANNOT-DUPLICATE"
+		}
+		"""
+    Then the REST response does not contain key "mutatedEntity"
+    And the http status code is 422
+
+  Scenario: Complete the task with comments
+    When I PUT a REST request to URL "/issue/${id}/completeTask" with payload
+		"""
+		{
+			"taskId":"${taskId}",
+			"comment": "Nothing found. cannot duplicate"
+		}
+		"""
+    Then the REST response contains key "mutatedEntity"
+    And the REST response key "mutatedEntity.id" is "${id}"
+    And the REST response key "mutatedEntity.currentState.stateId" is "ASSIGNED"
+    And the REST response key "mutatedEntity.tasks[0].stateId" is "COMPLETED"
 
   Scenario: Resolve the issue with comments
     When I construct a REST request with header "x-request-id" and value "REQUEST-ID"

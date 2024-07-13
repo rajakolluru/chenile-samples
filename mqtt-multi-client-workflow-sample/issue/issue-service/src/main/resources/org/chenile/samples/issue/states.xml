@@ -5,6 +5,7 @@
 	<event-information eventId='resolve' meta-bodyType='org.chenile.workflow.param.MinimalPayload'/>
 	<event-information eventId='close' meta-bodyType='org.chenile.workflow.param.MinimalPayload'/>
 	<event-information eventId="addTask" meta-bodyType="org.chenile.samples.issue.model.Task"/>
+	<event-information eventId="completeTask" meta-bodyType="org.chenile.samples.issue.model.CompleteTaskPayload"/>
 	<default-transition-action componentName="issueBaseTransitionAction"/>
 	
 	<flow id='test-flow' default='true'>
@@ -16,8 +17,10 @@
 
 		<manual-state id='ASSIGNED'>
 			<on eventId="addTask" componentName="addTask"/>
+			<on eventId="completeTask" componentName="completeTask"/>
 			<on eventId='resolve' newStateId='RESOLVED' componentName='resolveIssue'/>
 		</manual-state>
+
 		<manual-state id='RESOLVED'>
 			<on eventId='close' newStateId='CLOSED' componentName='closeIssue'/>
 		</manual-state>
