@@ -10,7 +10,6 @@ import org.chenile.samples.issue.model.Issue;
 
 public class AssignIssueAction implements STMTransitionAction<Issue>{
 
-	@Override
 	public void doTransition(Issue issue, Object transitionParam, State startState, String eventId,
 			State endState, STMInternalTransitionInvoker<?> stm, Transition transition) throws Exception {
 		AssignIssuePayload payload = (AssignIssuePayload) transitionParam;

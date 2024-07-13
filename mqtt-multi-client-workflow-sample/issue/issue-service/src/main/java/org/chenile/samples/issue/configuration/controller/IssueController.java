@@ -1,27 +1,16 @@
 package org.chenile.samples.issue.configuration.controller;
 
-import java.util.Map;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.chenile.base.response.GenericResponse;
 import org.chenile.http.annotation.BodyTypeSelector;
 import org.chenile.http.annotation.ChenileController;
 import org.chenile.http.annotation.ChenileParamType;
 import org.chenile.http.handler.ControllerSupport;
-import org.springframework.http.ResponseEntity;
-
-import org.chenile.workflow.model.AbstractStateEntity;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
-import org.chenile.workflow.dto.StateEntityServiceResponse;
 import org.chenile.samples.issue.model.Issue;
+import org.chenile.stm.StateEntity;
+import org.chenile.workflow.dto.StateEntityServiceResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @ChenileController(value = "issueService", serviceName = "_issueStateEntityService_",
@@ -29,16 +18,16 @@ import org.chenile.samples.issue.model.Issue;
 public class IssueController extends ControllerSupport{
 	
 	@GetMapping("/issue/{id}")
-	public ResponseEntity<GenericResponse<StateEntityServiceResponse>> retrieve(
+	public ResponseEntity<GenericResponse<StateEntityServiceResponse<Issue>>> retrieve(
 			HttpServletRequest httpServletRequest,
 			@PathVariable String id){
 		return process("retrieve",httpServletRequest,id);	
 	}
 
 	@PostMapping("/issue")
-	public ResponseEntity<GenericResponse<StateEntityServiceResponse>> create(
+	public ResponseEntity<GenericResponse<StateEntityServiceResponse<Issue>>> create(
 			HttpServletRequest httpServletRequest,
-			@ChenileParamType(AbstractStateEntity.class)
+			@ChenileParamType(StateEntity.class)
 			@RequestBody Issue entity){
 		return process("create",httpServletRequest,entity);	
 	}
@@ -46,7 +35,7 @@ public class IssueController extends ControllerSupport{
 	
 	@PutMapping("/issue/{id}/{eventID}")
 	@BodyTypeSelector("issueBodyTypeSelector")
-	public ResponseEntity<GenericResponse<StateEntityServiceResponse>> processById(
+	public ResponseEntity<GenericResponse<StateEntityServiceResponse<Issue>>> processById(
 			HttpServletRequest httpServletRequest,
 			@PathVariable String id,
 			@PathVariable String eventID,

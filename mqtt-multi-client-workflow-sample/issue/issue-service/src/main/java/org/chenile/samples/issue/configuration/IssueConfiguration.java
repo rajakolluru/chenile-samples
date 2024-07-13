@@ -1,5 +1,6 @@
 package org.chenile.samples.issue.configuration;
 
+import org.chenile.samples.issue.service.cmds.AddTask;
 import org.chenile.stm.STM;
 import org.chenile.stm.action.STMTransitionAction;
 import org.chenile.stm.impl.BeanFactoryAdapter;
@@ -110,4 +111,8 @@ public class IssueConfiguration {
 	@Bean IssueHealthChecker issueHealthChecker(){
     	return new IssueHealthChecker();
     }
+	@Bean
+	AddTask addTask(){
+		return new AddTask();
+	}
 }
