@@ -40,7 +40,7 @@ public class TestFoo {
 	@Test public void testFooWIthTrajectory() throws Exception {
 		mvc.perform( MockMvcRequestBuilders
             .get("/test")
-            .header("chenile-trajectory-id", "xxx")
+            .header("x-chenile-trajectory-id", "xxx")
             .accept(MediaType.APPLICATION_JSON))
         	.andDo(print())
         	.andExpect(status().isOk())
@@ -51,7 +51,7 @@ public class TestFoo {
 	@Test public void testFooWIthTrajectoryYYY() throws Exception {
 		mvc.perform( MockMvcRequestBuilders
             .get("/test")
-            .header("chenile-trajectory-id", "yyy")
+            .header("x-chenile-trajectory-id", "yyy")
             .accept(MediaType.APPLICATION_JSON))
         	.andDo(print())
         	.andExpect(status().isOk())
