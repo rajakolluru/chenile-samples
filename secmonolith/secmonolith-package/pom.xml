@@ -73,15 +73,6 @@
 				      <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
 				   </configuration>
   			</plugin>
-  			<plugin>
-			   <groupId>org.springdoc</groupId>
-			   <artifactId>springdoc-openapi-maven-plugin</artifactId>
-			   <version>1.1</version>
-  			</plugin>
-  			<plugin>
-			   <groupId>org.chenile</groupId>
-			   <artifactId>chenile-config-maven-plugin</artifactId>
-  			</plugin>
 		</plugins>
 	</build>
 

@@ -1,6 +1,7 @@
 package org.chenile.samples.issue.bdd;
 
 import cucumber.api.java.en.And;
+import org.chenile.mqtt.test.MqttBaseTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -20,6 +21,6 @@ import cucumber.api.java.en.Given;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,classes = SpringTestConfig.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("unittest")
-public class CukesSteps {
+public class CukesSteps extends MqttBaseTest {
 	@Given("dummy") public void dummy(){}
 }

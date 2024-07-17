@@ -1,9 +1,6 @@
 package org.chenile.samples.issue.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.chenile.jpautils.entity.AbstractJpaStateEntity;
 
 import java.io.Serial;
@@ -18,7 +15,8 @@ public class Issue extends AbstractJpaStateEntity {
 	public String resolveComment;
 	public String description;
 	public String openedBy;
-	@OneToMany(cascade = CascadeType.ALL )
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+
 	public List<Task> tasks;
 
 	@Override

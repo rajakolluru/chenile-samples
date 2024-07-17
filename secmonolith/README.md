@@ -26,3 +26,4 @@ http://localhost:8080/v3/api-docs -> emits the swagger json.
 Please see secmonolith-package/target/openapi.json to see the generated Swagger JSON
 Please see secmonolith-package/target/service-registry to see the Chenile generated JSONs for possible import to a service registry
 
+Make sure that keycloak server is running and that quickstart realm is enabled. 

@@ -20,6 +20,6 @@ public class IssueEntityStore implements EntityStore<Issue>{
 	public Issue retrieve(String id) {
 		Optional<Issue> issue = issueRepository.findById(id);
 		if (issue.isPresent()) return issue.get();
-		throw new NotFoundException(1500,"Unable to find employee with ID " + id);
+		throw new NotFoundException(1500,"Unable to find order with ID " + id);
 	}
 }

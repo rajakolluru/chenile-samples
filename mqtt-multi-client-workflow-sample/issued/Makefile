@@ -14,7 +14,7 @@
 # this of course means that SNAPSHOT releases are flaky since we dont have tags to make them
 # predictable
 
-export version := $(shell git describe --tag --abbrev=0)
+export version := $(shell git describe --tag --abbrev=0 2> /dev/null)
 .DEFAULT_GOAL := help
 ifndef version
 	override version = 0.0.1-SNAPSHOT
@@ -115,6 +115,25 @@ delete-origin-tag: check-tag
 .PHONY: delete-local-tag
 delete-local-tag: check-tag
 	git tag -d $(tag)
+
+## cloud-image: Build a docker image for cloud
+.PHONY: cloud-image
+cloud-image:
+	docker build -t chenile-samples/issue/cloud-container .
+
+## store-image: Build a docker image for store
+.PHONY: store-image
+store-image:
+	docker build -f store/Dockerfile -t chenile-samples/issue/store-container .
+
+## images: makes all images
+.PHONY: images
+images: store-image cloud-image
+
+## build-all: builds the jars and the images
+.PHONY: build-all
+build-all: build images
+
 
 ## help: type for getting this help
 .PHONY: help
