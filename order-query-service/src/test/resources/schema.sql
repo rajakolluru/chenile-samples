@@ -1,37 +1,39 @@
 DROP TABLE IF EXISTS orders;
 
-CREATE TABLE orders (ID INT PRIMARY KEY, amount decimal, order_date timestamp with time zone);
+CREATE TABLE orders (ID INT PRIMARY KEY, stateId varchar(30), flowId varchar(30),
+      amount decimal, order_date timestamp with time zone
+  );
 
-INSERT INTO orders (ID,amount,order_date) VALUES (1,2000, '2024-05-01 12:00:00+5:30');
-INSERT INTO orders (ID,amount,order_date) VALUES (2,2001, '2024-05-02 12:00:00+5:30');
-INSERT INTO orders (ID,amount,order_date) VALUES (3,2002, '2024-05-03 12:00:00+5:30');
-INSERT INTO orders (ID,amount,order_date) VALUES (4,2003, '2024-05-04 12:00:00+5:30');
-INSERT INTO orders (ID,amount,order_date) VALUES (5,2004, '2024-05-05 12:00:00+5:30');
-INSERT INTO orders (ID,amount,order_date) VALUES (6,2005, '2024-05-06 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (7, 2006, '2024-05-07 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (8, 2007, '2024-05-08 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (9, 2008, '2024-05-09 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (10, 2009, '2024-05-10 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (11, 2010, '2024-05-11 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (12, 2011, '2024-05-12 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (13, 2012, '2024-05-13 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (14, 2013, '2024-05-14 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (15, 2014, '2024-05-15 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (16, 2015, '2024-05-16 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (17, 2016, '2024-05-17 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (18, 2017, '2024-05-18 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (19, 2018, '2024-05-19 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (20, 2019, '2024-05-20 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (21, 2020, '2024-05-21 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (22, 2021, '2024-05-22 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (23, 2022, '2024-05-23 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (24, 2023, '2024-05-24 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (25, 2024, '2024-05-25 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (26, 2025, '2024-05-26 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (27, 2026, '2024-05-27 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (28, 2027, '2024-05-28 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (29, 2028, '2024-05-29 12:00:00+5:30');
-insert into orders(id,amount,order_date) values (30, 2029, '2024-05-30 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId, amount,order_date) VALUES (1,'CREATED','order-flow',2000, '2024-05-01 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date) VALUES (2,'CREATED','order-flow',2001, '2024-05-02 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date) VALUES (3,'CREATED','order-flow',2002, '2024-05-03 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date) VALUES (4,'CREATED','order-flow',2003, '2024-05-04 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date) VALUES (5,'CREATED','order-flow',2004, '2024-05-05 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date) VALUES (6,'CREATED','order-flow',2005, '2024-05-06 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (7,'CREATED','order-flow', 2006, '2024-05-07 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (8,'CREATED','order-flow', 2007, '2024-05-08 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (9, 'CREATED','order-flow',2008, '2024-05-09 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (10,'CREATED','order-flow', 2009, '2024-05-10 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (11,'CREATED','order-flow', 2010, '2024-05-11 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (12,'CREATED','order-flow', 2011, '2024-05-12 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (13,'CREATED','order-flow', 2012, '2024-05-13 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (14, 'CREATED','order-flow',2013, '2024-05-14 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (15, 'CREATED','order-flow',2014, '2024-05-15 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (16, 'PAYMENT_INITIATED','order-flow',2015, '2024-05-16 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (17, 'PAYMENT_INITIATED','order-flow',2016, '2024-05-17 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (18, 'PAYMENT_INITIATED','order-flow',2017, '2024-05-18 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (19, 'PAYMENT_INITIATED','order-flow',2018, '2024-05-19 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (20, 'PAYMENT_INITIATED','order-flow',2019, '2024-05-20 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (21, 'PAYMENT_CONFIRMED','order-flow',2020, '2024-05-21 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (22, 'PAYMENT_CONFIRMED','order-flow',2021, '2024-05-22 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (23, 'PAYMENT_CONFIRMED','order-flow',2022, '2024-05-23 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (24, 'PAYMENT_CONFIRMED','order-flow',2023, '2024-05-24 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (25, 'PAYMENT_CONFIRMED','order-flow',2024, '2024-05-25 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (26, 'CLOSED','order-flow',2025, '2024-05-26 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (27, 'CLOSED','order-flow',2026, '2024-05-27 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (28, 'CLOSED','order-flow',2027, '2024-05-28 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (29, 'CLOSED','order-flow',2028, '2024-05-29 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date) values (30, 'CLOSED','order-flow',2029, '2024-05-30 12:00:00+5:30');
 
 DROP TABLE IF EXISTS order_lines;
 

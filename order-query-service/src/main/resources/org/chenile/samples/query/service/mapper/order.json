@@ -1,6 +1,5 @@
 [
 	{
-
         "id": "Order.getAll",
         "name": "orders",
         "columnMetadata": {
@@ -44,11 +43,27 @@
 				"likeQuery": false,
 				"filterable": false,
 				"betweenQuery": false
+			},
+			"stateId" : {
+				"name": "stateId",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": false
+			},
+			"flowId" : {
+				"name": "flowId",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": false
 			}
 		},	
 		"flexiblePropnames": false,
         "paginated" : true,
-        "sortable" : true
+        "sortable" : true,
+		"toDoList": true,
+		"stateColumn": "stateId",
+		"flowColumn": "flowId",
+		"workflowName": "order"
     }
     
 ]

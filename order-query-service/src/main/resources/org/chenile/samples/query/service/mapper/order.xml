@@ -7,6 +7,8 @@
 
 <resultMap id = "result" type = "map">
     <result property = "id" column = "ID"/>
+    <result property="stateId" column ="STATEID"/>
+    <result property="flowId" column ="FLOWID"/>
     <result property = "amount" column = "AMOUNT"/>
     <result property = "orderDate" column = "ORDER_DATE"/>
     <collection property="orderLines" javaType="ArrayList" resultMap="olResultMap"/>
@@ -28,6 +30,13 @@ Hence the count query does a count(order.id) rather than do a full count(*)
 	select count(distinct o.id) from orders o inner join order_lines ol
                 on o.id = ol.order_id
     <where>
+        <if test="stateId != null">
+            AND stateId in
+            <foreach item="item" index="index" collection="stateId"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         <if test="amount != null" >
             AND amount between #{amount[0]} and #{amount[1]}
         </if>
@@ -61,10 +70,17 @@ page of data rather than for all orders. This takes care of pagination as well a
 final select.
 -->
 <select id = "getAll" resultMap = "result">
-    with u(id, amount,order_date) as (
-       SELECT  id, amount,order_date
+    with u(id, stateId, flowId, amount,order_date) as (
+       SELECT  id, stateId, flowId,amount,order_date
         FROM orders
         <where>
+            <if test="stateId != null">
+                AND stateId in
+                <foreach item="item" index="index" collection="stateId"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
             <if test="amount != null" >
                 AND amount between #{amount[0]} and #{amount[1]}
             </if>
@@ -75,6 +91,8 @@ final select.
         ${pagination}
     )
         select u.id as id,
+        u.stateId as stateId,
+        u.flowId as flowId,
         u.amount as amount,
         to_char(u.order_date,'YYYY-MM-DD HH12:MI:SS') as order_date,
         ol.product as product,

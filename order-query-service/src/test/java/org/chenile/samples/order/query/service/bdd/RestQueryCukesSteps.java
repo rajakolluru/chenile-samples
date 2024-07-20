@@ -1,5 +1,6 @@
 package org.chenile.samples.order.query.service.bdd;
 
+import org.chenile.samples.order.MockSS;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -17,4 +18,9 @@ public class RestQueryCukesSteps {
 	public void dummy() {
 		
 	}
+
+    @Given("that user is {string}")
+    public void thatUserIs(String user) {
+		MockSS.userName = user;
+    }
 }
