@@ -6,7 +6,7 @@ import org.chenile.http.annotation.InterceptedBy;
 import org.chenile.samples.secservice.model.SecServiceEntity;
 import org.chenile.http.annotation.ChenileController;
 import org.chenile.http.handler.ControllerSupport;
-import org.chenile.security.SecurityConfig;
+import org.chenile.security.model.SecurityConfig;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
