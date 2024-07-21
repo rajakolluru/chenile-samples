@@ -55,6 +55,18 @@
 				"filterable": true,
 				"columnType": "Text",
 				"betweenQuery": false
+			},
+			"slaYellowDate" : {
+				"name": "slaYellowDate",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": true
+			},
+			"slaRedDate" : {
+				"name": "slaRedDate",
+				"filterable": true,
+				"columnType": "Text",
+				"betweenQuery": true
 			}
 		},	
 		"flexiblePropnames": false,
@@ -64,8 +76,8 @@
 		"stateColumn": "stateId",
 		"flowColumn": "flowId",
 		"workflowName": "order",
-		"tendingLateColumn": "SLA_TENDING_LATE_DATE",
-		"lateColumn": "SLA_LATE_DATE"
+		"tendingLateColumn": "SLA_YELLOW_DATE",
+		"lateColumn": "SLA_RED_DATE"
     }
     
 ]

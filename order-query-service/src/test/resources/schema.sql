@@ -2,57 +2,57 @@ DROP TABLE IF EXISTS orders;
 
 CREATE TABLE orders (ID INT PRIMARY KEY, stateId varchar(30), flowId varchar(30),
       amount decimal, order_date timestamp with time zone,
-      sla_tending_late_date timestamp with time zone,
-      sla_late_date timestamp with time zone
+      sla_yellow_date timestamp with time zone,
+      sla_red_date timestamp with time zone
   );
-
-INSERT INTO orders (ID,stateId, flowId, amount,order_date,sla_tending_late_date,sla_late_date) VALUES (1,'CREATED','order-flow',2000, '2024-05-01 12:00:00+5:30','2024-05-03 12:00:00+5:30','2024-05-05 12:00:00+5:30');
-INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) VALUES (2,'CREATED','order-flow',2001, '2024-05-02 12:00:00+5:30','2024-05-04 12:00:00+5:30','2024-05-06 12:00:00+5:30');
-INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) VALUES (3,'CREATED','order-flow',2002, '2024-05-03 12:00:00+5:30','2024-05-05 12:00:00+5:30','2024-05-07 12:00:00+5:30');
-INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) VALUES (4,'CREATED','order-flow',2003, '2024-05-04 12:00:00+5:30','2024-05-06 12:00:00+5:30','2024-05-08 12:00:00+5:30');
-INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) VALUES (5,'CREATED','order-flow',2004, '2024-05-05 12:00:00+5:30','2024-05-07 12:00:00+5:30','2024-05-09 12:00:00+5:30');
-INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) VALUES (6,'CREATED','order-flow',2005, '2024-05-06 12:00:00+5:30','2024-05-08 12:00:00+5:30','2024-05-10 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (7,'CREATED','order-flow', 2006, '2024-05-07 12:00:00+5:30','2024-05-09 12:00:00+5:30','2024-05-11 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (8,'CREATED','order-flow', 2007, '2024-05-08 12:00:00+5:30','2024-05-10 12:00:00+5:30','2024-05-12 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (9, 'CREATED','order-flow',2008, '2024-05-09 12:00:00+5:30','2024-05-11 12:00:00+5:30','2024-05-13 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (10,'CREATED','order-flow', 2009, '2024-05-10 12:00:00+5:30','2024-05-12 12:00:00+5:30','2024-05-14 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (11,'CREATED','order-flow', 2010, '2024-05-11 12:00:00+5:30','2024-05-13 12:00:00+5:30','2024-05-15 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (12,'CREATED','order-flow', 2011, '2024-05-12 12:00:00+5:30','2024-05-14 12:00:00+5:30','2024-05-16 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (13,'CREATED','order-flow', 2012, '2024-05-13 12:00:00+5:30','2024-05-15 12:00:00+5:30','2024-05-17 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (14, 'CREATED','order-flow',2013, '2024-05-14 12:00:00+5:30','2024-05-16 12:00:00+5:30','2024-05-18 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (15, 'CREATED','order-flow',2014, '2024-05-15 12:00:00+5:30','2024-05-17 12:00:00+5:30','2024-05-19 12:00:00+5:30');
+--- Data notes. IDs are numeric and range from 1 to 30. All order amounts are 2000 + Id - 1
+--- All order_dates range from 2024-05-01 to 2024-05-30.
+--- All sla_yellow_dates are order dates + 2 days. All sla_red_dates are sla_yellow_date + 2 days.
+--- The exception is for ID 16 so that we can demonstrate the toDoList features.
+--- CREATED state for IDs 1 - 15 , PAYMENT_INITIATED for IDs 16-20, PAYMENT_CONFIRMED for IDs 21-25
+--- and CLOSED for IDs 26 - 30
+--- These conventions keep the results predictable and hence - assertable.
+INSERT INTO orders (ID,stateId, flowId, amount,order_date,sla_yellow_date,sla_red_date) VALUES (1,'CREATED','order-flow',2000, '2024-05-01 12:00:00+5:30','2024-05-03 12:00:00+5:30','2024-05-05 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) VALUES (2,'CREATED','order-flow',2001, '2024-05-02 12:00:00+5:30','2024-05-04 12:00:00+5:30','2024-05-06 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) VALUES (3,'CREATED','order-flow',2002, '2024-05-03 12:00:00+5:30','2024-05-05 12:00:00+5:30','2024-05-07 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) VALUES (4,'CREATED','order-flow',2003, '2024-05-04 12:00:00+5:30','2024-05-06 12:00:00+5:30','2024-05-08 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) VALUES (5,'CREATED','order-flow',2004, '2024-05-05 12:00:00+5:30','2024-05-07 12:00:00+5:30','2024-05-09 12:00:00+5:30');
+INSERT INTO orders (ID,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) VALUES (6,'CREATED','order-flow',2005, '2024-05-06 12:00:00+5:30','2024-05-08 12:00:00+5:30','2024-05-10 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (7,'CREATED','order-flow', 2006, '2024-05-07 12:00:00+5:30','2024-05-09 12:00:00+5:30','2024-05-11 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (8,'CREATED','order-flow', 2007, '2024-05-08 12:00:00+5:30','2024-05-10 12:00:00+5:30','2024-05-12 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (9, 'CREATED','order-flow',2008, '2024-05-09 12:00:00+5:30','2024-05-11 12:00:00+5:30','2024-05-13 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (10,'CREATED','order-flow', 2009, '2024-05-10 12:00:00+5:30','2024-05-12 12:00:00+5:30','2024-05-14 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (11,'CREATED','order-flow', 2010, '2024-05-11 12:00:00+5:30','2024-05-13 12:00:00+5:30','2024-05-15 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (12,'CREATED','order-flow', 2011, '2024-05-12 12:00:00+5:30','2024-05-14 12:00:00+5:30','2024-05-16 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (13,'CREATED','order-flow', 2012, '2024-05-13 12:00:00+5:30','2024-05-15 12:00:00+5:30','2024-05-17 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (14, 'CREATED','order-flow',2013, '2024-05-14 12:00:00+5:30','2024-05-16 12:00:00+5:30','2024-05-18 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (15, 'CREATED','order-flow',2014, '2024-05-15 12:00:00+5:30','2024-05-17 12:00:00+5:30','2024-05-19 12:00:00+5:30');
 -- the data below is aberrant and was created to test out the toDoList functionality
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (16, 'PAYMENT_INITIATED','order-flow',2015, '2024-05-16 12:00:00+5:30','2024-05-20 12:00:00+5:30','2024-05-24 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (17, 'PAYMENT_INITIATED','order-flow',2016, '2024-05-17 12:00:00+5:30','2024-05-19 12:00:00+5:30','2024-05-21 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (18, 'PAYMENT_INITIATED','order-flow',2017, '2024-05-18 12:00:00+5:30','2024-05-20 12:00:00+5:30','2024-05-22 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (19, 'PAYMENT_INITIATED','order-flow',2018, '2024-05-19 12:00:00+5:30','2024-05-21 12:00:00+5:30','2024-05-23 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (20, 'PAYMENT_INITIATED','order-flow',2019, '2024-05-20 12:00:00+5:30','2024-05-22 12:00:00+5:30','2024-05-24 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (21, 'PAYMENT_CONFIRMED','order-flow',2020, '2024-05-21 12:00:00+5:30','2024-05-23 12:00:00+5:30','2024-05-25 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (22, 'PAYMENT_CONFIRMED','order-flow',2021, '2024-05-22 12:00:00+5:30','2024-05-24 12:00:00+5:30','2024-05-26 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (23, 'PAYMENT_CONFIRMED','order-flow',2022, '2024-05-23 12:00:00+5:30','2024-05-25 12:00:00+5:30','2024-05-27 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (24, 'PAYMENT_CONFIRMED','order-flow',2023, '2024-05-24 12:00:00+5:30','2024-05-26 12:00:00+5:30','2024-05-28 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (25, 'PAYMENT_CONFIRMED','order-flow',2024, '2024-05-25 12:00:00+5:30','2024-05-27 12:00:00+5:30','2024-05-29 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (26, 'CLOSED','order-flow',2025, '2024-05-26 12:00:00+5:30','2024-05-28 12:00:00+5:30','2024-05-30 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (27, 'CLOSED','order-flow',2026, '2024-05-27 12:00:00+5:30','2024-05-29 12:00:00+5:30','2024-05-31 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (28, 'CLOSED','order-flow',2027, '2024-05-28 12:00:00+5:30','2024-05-30 12:00:00+5:30','2024-06-01 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (29, 'CLOSED','order-flow',2028, '2024-05-29 12:00:00+5:30','2024-05-31 12:00:00+5:30','2024-06-02 12:00:00+5:30');
-insert into orders(id,stateId, flowId,amount,order_date,sla_tending_late_date,sla_late_date) values (30, 'CLOSED','order-flow',2029, '2024-05-30 12:00:00+5:30','2024-06-01 12:00:00+5:30','2024-06-03 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (16, 'PAYMENT_INITIATED','order-flow',2015, '2024-05-16 12:00:00+5:30','2024-05-20 12:00:00+5:30','2024-05-24 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (17, 'PAYMENT_INITIATED','order-flow',2016, '2024-05-17 12:00:00+5:30','2024-05-19 12:00:00+5:30','2024-05-21 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (18, 'PAYMENT_INITIATED','order-flow',2017, '2024-05-18 12:00:00+5:30','2024-05-20 12:00:00+5:30','2024-05-22 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (19, 'PAYMENT_INITIATED','order-flow',2018, '2024-05-19 12:00:00+5:30','2024-05-21 12:00:00+5:30','2024-05-23 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (20, 'PAYMENT_INITIATED','order-flow',2019, '2024-05-20 12:00:00+5:30','2024-05-22 12:00:00+5:30','2024-05-24 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (21, 'PAYMENT_CONFIRMED','order-flow',2020, '2024-05-21 12:00:00+5:30','2024-05-23 12:00:00+5:30','2024-05-25 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (22, 'PAYMENT_CONFIRMED','order-flow',2021, '2024-05-22 12:00:00+5:30','2024-05-24 12:00:00+5:30','2024-05-26 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (23, 'PAYMENT_CONFIRMED','order-flow',2022, '2024-05-23 12:00:00+5:30','2024-05-25 12:00:00+5:30','2024-05-27 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (24, 'PAYMENT_CONFIRMED','order-flow',2023, '2024-05-24 12:00:00+5:30','2024-05-26 12:00:00+5:30','2024-05-28 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (25, 'PAYMENT_CONFIRMED','order-flow',2024, '2024-05-25 12:00:00+5:30','2024-05-27 12:00:00+5:30','2024-05-29 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (26, 'CLOSED','order-flow',2025, '2024-05-26 12:00:00+5:30','2024-05-28 12:00:00+5:30','2024-05-30 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (27, 'CLOSED','order-flow',2026, '2024-05-27 12:00:00+5:30','2024-05-29 12:00:00+5:30','2024-05-31 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (28, 'CLOSED','order-flow',2027, '2024-05-28 12:00:00+5:30','2024-05-30 12:00:00+5:30','2024-06-01 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (29, 'CLOSED','order-flow',2028, '2024-05-29 12:00:00+5:30','2024-05-31 12:00:00+5:30','2024-06-02 12:00:00+5:30');
+insert into orders(id,stateId, flowId,amount,order_date,sla_yellow_date,sla_red_date) values (30, 'CLOSED','order-flow',2029, '2024-05-30 12:00:00+5:30','2024-06-01 12:00:00+5:30','2024-06-03 12:00:00+5:30');
 
 DROP TABLE IF EXISTS order_lines;
 
 CREATE TABLE order_lines (ID INT PRIMARY KEY, product varchar(32), order_id int,
            quantity int, unit_price decimal);
-insert into order_lines(id, product,order_id, quantity, unit_price)
-      values(1,'prod11',1,5,200);
-insert into order_lines(id, product,order_id, quantity, unit_price)
-      values(2,'prod12',1,10,100);
-
-insert into order_lines(id, product,order_id, quantity, unit_price)
-      values(3,'prod21',2,5,200);
-insert into order_lines(id, product,order_id, quantity, unit_price)
-      values(4,'prod22',2,10,100);
-insert into order_lines(id, product,order_id, quantity, unit_price)
-      values(5,'prod23',2,1,1);
+insert into order_lines(id, product,order_id, quantity, unit_price) values(1,'prod11',1,5,200);
+insert into order_lines(id, product,order_id, quantity, unit_price) values(2,'prod12',1,10,100);
+insert into order_lines(id, product,order_id, quantity, unit_price) values(3,'prod21',2,5,200);
+insert into order_lines(id, product,order_id, quantity, unit_price) values(4,'prod22',2,10,100);
+insert into order_lines(id, product,order_id, quantity, unit_price) values(5,'prod23',2,1,1);
 
 insert into order_lines(id,product,order_id, quantity, unit_price) values(6,'prod31', 3,5,200);
 insert into order_lines(id,product,order_id, quantity, unit_price) values(7,'prod32', 3,10,100);

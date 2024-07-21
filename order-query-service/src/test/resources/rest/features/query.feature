@@ -233,8 +233,8 @@ Scenario: Test sort criteria at the order lines level
 
 Scenario: Test toDoList functionality - Bank can only confirm payments.
     So it must only show all orders with state Id as "PAYMENT_INITIATED" (rows 16 to 20)
-    The expected order is 17,18,19,16,20 (since ID 16 and 20 will have the same sla_late_date
-    16 will come before 20 because sla_tending_late_date of 16 < sla_tending_late_date of 20)
+    The expected order is 17,18,19,16,20 (since ID 16 and 20 will have the same sla_red_date
+    16 will come before 20 because sla_yellow_date of 16 < sla_yellow_date of 20)
 Given that user is "bank"
 When I POST a REST request to URL "/q/orders" with payload
 """
