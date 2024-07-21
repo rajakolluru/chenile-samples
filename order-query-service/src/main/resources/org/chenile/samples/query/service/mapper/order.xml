@@ -11,6 +11,8 @@
     <result property="flowId" column ="FLOWID"/>
     <result property = "amount" column = "AMOUNT"/>
     <result property = "orderDate" column = "ORDER_DATE"/>
+    <result property="slaTendingLateDate" column="SLA_TENDING_LATE_DATE"/>
+    <result property="slaLateDate" column="SLA_LATE_DATE"/>
     <collection property="orderLines" javaType="ArrayList" resultMap="olResultMap"/>
 </resultMap>
 
@@ -43,6 +45,12 @@ Hence the count query does a count(order.id) rather than do a full count(*)
         <if test="order_date != null" >
             AND order_date between #{order_date[0]} and #{order_date[1]}
         </if>
+        <if test="sla_tending_late_date != null" >
+            AND sla_tending_late_date between #{sla_tending_late_date[0]} and #{sla_tending_late_date[1]}
+        </if>
+        <if test="sla_late_date != null" >
+            AND sla_late_date between #{sla_late_date[0]} and #{sla_late_date[1]}
+        </if>
         <if test="product != null">
             AND product in
             <foreach item="item" index="index" collection="product"
@@ -70,8 +78,8 @@ page of data rather than for all orders. This takes care of pagination as well a
 final select.
 -->
 <select id = "getAll" resultMap = "result">
-    with u(id, stateId, flowId, amount,order_date) as (
-       SELECT  id, stateId, flowId,amount,order_date
+    with u(id, stateId, flowId, amount,sla_tending_late_date, sla_late_date, order_date) as (
+       SELECT  id, stateId, flowId,amount, sla_tending_late_date, sla_late_date,order_date
         FROM orders
         <where>
             <if test="stateId != null">
@@ -87,6 +95,12 @@ final select.
             <if test="order_date != null" >
                 AND order_date between #{order_date[0]} and #{order_date[1]}
             </if>
+            <if test="sla_tending_late_date != null" >
+                AND sla_tending_late_date between #{sla_tending_late_date[0]} and #{sla_tending_late_date[1]}
+            </if>
+            <if test="sla_late_date != null" >
+                AND sla_late_date between #{sla_late_date[0]} and #{sla_late_date[1]}
+            </if>
         </where>
         ${pagination}
     )
@@ -95,6 +109,8 @@ final select.
         u.flowId as flowId,
         u.amount as amount,
         to_char(u.order_date,'YYYY-MM-DD HH12:MI:SS') as order_date,
+        to_char(u.sla_tending_late_date,'YYYY-MM-DD HH12:MI:SS') as sla_tending_late_date,
+        to_char(u.sla_late_date,'YYYY-MM-DD HH12:MI:SS') as sla_late_date,
         ol.product as product,
         ol.unit_price as unit_price,
         ol.quantity as quantity

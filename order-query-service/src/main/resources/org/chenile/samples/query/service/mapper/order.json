@@ -63,7 +63,9 @@
 		"toDoList": true,
 		"stateColumn": "stateId",
 		"flowColumn": "flowId",
-		"workflowName": "order"
+		"workflowName": "order",
+		"tendingLateColumn": "SLA_TENDING_LATE_DATE",
+		"lateColumn": "SLA_LATE_DATE"
     }
     
 ]

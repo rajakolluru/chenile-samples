@@ -207,6 +207,7 @@ Scenario: Test the sub query at the collection level - Test higher and lower bou
     And the REST response key "list[0].row.id" is "1"
 
 Scenario: Test sort criteria at the order lines level
+    Given that user is "bank"
     When I POST a REST request to URL "/q/orders" with payload
 """
 {
@@ -232,6 +233,8 @@ Scenario: Test sort criteria at the order lines level
 
 Scenario: Test toDoList functionality - Bank can only confirm payments.
     So it must only show all orders with state Id as "PAYMENT_INITIATED" (rows 16 to 20)
+    The expected order is 17,18,19,16,20 (since ID 16 and 20 will have the same sla_late_date
+    16 will come before 20 because sla_tending_late_date of 16 < sla_tending_late_date of 20)
 Given that user is "bank"
 When I POST a REST request to URL "/q/orders" with payload
 """
@@ -246,9 +249,12 @@ And success is true
 And the REST response key "maxRows" is "5"
 And the REST response key "numRowsReturned" is "5"
 And the REST response key "currentPage" is "1"
-And the REST response key "list[0].row.id" is "16"
+And the REST response key "list[0].row.id" is "17"
 And the REST response key "list[0].row.stateId" is "PAYMENT_INITIATED"
 And the REST response key "list[0].allowedActions[0].allowedAction" is "confirmPayment"
+And the REST response key "list[1].row.id" is "18"
+And the REST response key "list[2].row.id" is "19"
+And the REST response key "list[3].row.id" is "16"
 And the REST response key "list[4].row.id" is "20"
 And the REST response key "list[4].row.stateId" is "PAYMENT_INITIATED"
 And the REST response key "list[4].allowedActions[0].allowedAction" is "confirmPayment"
