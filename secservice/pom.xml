@@ -9,7 +9,7 @@
 	</modules>
 	<parent>
 		<groupId>org.chenile</groupId>
-		<version>1.3.5</version>
+		<version>1.3.6</version>
 		<artifactId>chenile-parent</artifactId>
 	</parent>
 
@@ -21,7 +21,7 @@
 	<groupId>org.chenile.samples.secservice</groupId>
 	<version>${revision}</version>
 	<artifactId>secservice-parent</artifactId>
-	<name>All Modules that belong to the secservice </name>
+	<name>All Modules that belong to the sec-service </name>
 	<description>Modules execution project and Parent Pom</description>
 
 	<dependencyManagement>

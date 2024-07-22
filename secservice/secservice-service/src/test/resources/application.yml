@@ -5,8 +5,8 @@ chenile:
       id: "authz-servlet"
       secret: "secret"
     keycloak:
-      host: "localhost"
-      port: 8188
+      host: "http://localhost:8180"
+      port: 8180
       base:
         realm: quickstart
 
