@@ -5,6 +5,8 @@ logging:
     com.netscoretech.poc: DEBUG
 
 spring:
+  banner:
+    location: classpath:banner.txt
   jpa:
     hibernate:
       ddl-auto: create

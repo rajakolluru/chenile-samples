@@ -5,6 +5,8 @@ logging:
     org.chenile: debug
 
 spring:
+  banner:
+    location: classpath:banner.txt
   jpa:
     hibernate:
       ddl-auto: update
