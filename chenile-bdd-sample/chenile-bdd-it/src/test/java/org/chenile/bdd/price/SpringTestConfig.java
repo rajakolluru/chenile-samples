@@ -8,11 +8,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 
 @Configuration
-@PropertySource("classpath:com/netscoretech/pos/price/TestService.properties")
-@SpringBootApplication(scanBasePackages = {"org.chenile.configuration", "com.netscoretech.pos.**"})
+@PropertySource("classpath:org/chenile/bdd/price/TestService.properties")
+@SpringBootApplication(scanBasePackages = {"org.chenile.configuration"})
 @ActiveProfiles("unittest")
 public class SpringTestConfig extends SpringBootServletInitializer {
-
-
 }
 

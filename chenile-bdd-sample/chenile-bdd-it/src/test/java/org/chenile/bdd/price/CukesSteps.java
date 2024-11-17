@@ -1,8 +1,6 @@
 package org.chenile.bdd.price;
 
-import org.chenile.bdd.price.SpringTestConfig;
 import cucumber.api.java.en.Given;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -16,7 +14,6 @@ import org.springframework.test.context.ActiveProfiles;
     * one step in a steps file)<br/>
 */
 @SpringBootTest(classes = SpringTestConfig.class)
-@AutoConfigureMockMvc
 @ActiveProfiles("unittest")
 public class CukesSteps {
 	
