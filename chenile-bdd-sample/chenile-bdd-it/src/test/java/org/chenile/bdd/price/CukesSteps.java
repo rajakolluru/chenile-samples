@@ -14,7 +14,6 @@ import org.springframework.test.context.ActiveProfiles;
     * one step in a steps file)<br/>
 */
 @SpringBootTest(classes = SpringTestConfig.class)
-@ActiveProfiles("unittest")
 public class CukesSteps {
 	
 	@Given("dummy") public void dummy(){}

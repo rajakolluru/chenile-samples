@@ -10,7 +10,6 @@ import org.springframework.test.context.ActiveProfiles;
 @Configuration
 @PropertySource("classpath:org/chenile/bdd/price/TestService.properties")
 @SpringBootApplication(scanBasePackages = {"org.chenile.configuration"})
-@ActiveProfiles("unittest")
 public class SpringTestConfig extends SpringBootServletInitializer {
 }
 

@@ -13,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
                 "classpath:org/chenile/cucumber/security/rest"},
         plugin = {"pretty"}
 )
-@ActiveProfiles("unittest")
 public class CukesRestTest {
 
 }
