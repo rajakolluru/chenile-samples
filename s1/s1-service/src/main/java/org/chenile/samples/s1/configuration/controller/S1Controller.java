@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @ChenileController(value = "s1Service", serviceName = "_s1Service_",
 		healthCheckerName = "s1HealthChecker")
 public class S1Controller extends ControllerSupport{
-	
+
+
 	@PostMapping("/s1/op1")
 	public ResponseEntity<GenericResponse<S1Entity>> op1(
 			HttpServletRequest httpServletRequest,
